@@ -160,7 +160,7 @@ class Specter extends PluginBase implements Listener{
                         if($icu instanceof iControlU){
                             $player = $this->getServer()->getPlayer($args[1]);
                             if($player instanceof SpecterPlayer){
-                                if($icu->isControl($sender)){
+                                if($icu->isControlling($sender)){
                                     $this->getServer()->dispatchCommand($sender, "icu control " . $args[1]);
                                 }else{
                                     $this->getServer()->dispatchCommand($sender, "icu stop ");
