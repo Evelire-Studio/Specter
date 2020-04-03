@@ -27,13 +27,13 @@ use pocketmine\utils\UUID;
 use specter\Specter;
 
 class SpecterInterface implements SourceInterface{
-    /** @var  SpecterPlayer[]|\SplObjectStorage */
+    /** @var SpecterPlayer[]|\SplObjectStorage */
     private $sessions;
-    /** @var  Specter */
+    /** @var Specter */
     private $specter;
-    /** @var  array */
+    /** @var array */
     private $ackStore;
-    /** @var  array */
+    /** @var array */
     private $replyStore;
 
     public function __construct(Specter $specter){
@@ -276,7 +276,9 @@ class SpecterInterface implements SourceInterface{
     }
 
     private function sendPacket(SpecterPlayer $player, DataPacket $packet){
-        $this->specter->getServer()->getPluginManager()->callEvent($ev = new DataPacketReceiveEvent($player, $packet));
+        $ev = new DataPacketReceiveEvent($player, $packet);
+        $ev->call();
+
         if(!$ev->isCancelled()){
             $packet->handle($player->getSessionAdapter());
         }

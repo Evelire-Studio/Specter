@@ -7,11 +7,16 @@ use specter\network\SpecterPlayer;
 use specter\Specter;
 
 class DummyPlayer{
+    /** @var string */
+    protected $name;
+    /** @var Server */
     private $server;
 
-    public function __construct($name, $address = "SPECTER", $port = 19133, Server $server = null){
+    public function __construct(string $name, $address = "SPECTER", $port = 19133, Server $server = null){
         $this->name = $name;
         $this->server = $server === null ? Server::getInstance() : $server;
+
+        //TODO: rewrite this exception shit
         if(!$this->getSpecter()->getInterface()->openSession($name, $address, $port)){
             throw new \Exception("Failed to open session.");
         }
