@@ -3,7 +3,7 @@ version: 0.7
 author: Falkirks
 main: specter\Specter
 api: [3.11]
-softdepend: ["iControlU"]
+depend: ["iControlU"]
 commands:
   specter:
     usage: /specter <action> <player> [params]

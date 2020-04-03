@@ -40,7 +40,7 @@ class Specter extends PluginBase implements Listener{
      *
      * @return bool
      */
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         if(isset($args[0])){
             switch($args[0]){
                 case 'spawn':
@@ -156,20 +156,17 @@ class Specter extends PluginBase implements Listener{
                 case 'control': //TODO update iControlU with better support
                 case 'icu':
                     if($sender instanceof Player){
-                        $icu = $this->getICU();
-                        if($icu instanceof iControlU){
-                            $player = $this->getServer()->getPlayer($args[1]);
-                            if($player instanceof SpecterPlayer){
-                                if($icu->isControlling($sender)){
-                                    $this->getServer()->dispatchCommand($sender, "icu control " . $args[1]);
-                                }else{
-                                    $this->getServer()->dispatchCommand($sender, "icu stop ");
-                                }
+                        $icu = iControlU::getInstance();
+
+                        $player = $this->getServer()->getPlayer($args[1]);
+                        if($player instanceof SpecterPlayer){
+                            if($icu->isControlling($sender)){
+                                $this->getServer()->dispatchCommand($sender, "icu control " . $args[1]);
                             }else{
-                                $sender->sendMessage("That player isn't a specter player");
+                                $this->getServer()->dispatchCommand($sender, "icu stop ");
                             }
                         }else{
-                            $sender->sendMessage("You need to have iControlU to use this feature.");
+                            $sender->sendMessage("That player isn't a specter player");
                         }
                     }else{
                         $sender->sendMessage("This command must be run in game.");
@@ -218,12 +215,5 @@ class Specter extends PluginBase implements Listener{
      */
     public function getInterface(){
         return $this->interface;
-    }
-
-    /**
-     * @return null|\icontrolu\iControlU
-     */
-    public function getICU(){
-        return $this->getServer()->getPluginManager()->getPlugin("iControlU");
     }
 }
