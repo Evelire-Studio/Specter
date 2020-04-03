@@ -206,7 +206,7 @@ class Specter extends PluginBase implements Listener{
      */
     public function onIllegalMove(PlayerIllegalMoveEvent $event){
         if($event->getPlayer() instanceof SpecterPlayer && $this->getConfig()->get('allowIllegalMoves')){
-            $event->setCancelled();
+            $event->setCancelled(true);
         }
     }
 
