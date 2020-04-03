@@ -212,28 +212,7 @@ class Specter extends PluginBase implements Listener{
             $event->setCancelled();
         }
     }
-    /*
-        /**
-         * @priority MONITOR
-         * @param DataPacketReceiveEvent $pk
-         *
-        public function onDataPacketRecieve(DataPacketReceiveEvent $pk){
-            if($pk->getPacket() instanceof RequestChunkRadiusPacket){
-                $this->getLogger()->info("RADIUS:" . $pk->getPacket()->radius);
-            }
-            $this->getLogger()->info("GOT:" . get_class($pk->getPacket()));
-        }
 
-        /**
-         * @priority MONITOR
-         * @param DataPacketSendEvent $pk
-         *
-        public function onDataPacketSend(DataPacketSendEvent $pk){
-            if(!($pk->getPacket() instanceof SetTimePacket)) {
-                $this->getLogger()->info("SEND:" . get_class($pk->getPacket()));
-            }
-        }
-    */
     /**
      * @return SpecterInterface
      */
